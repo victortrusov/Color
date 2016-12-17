@@ -12,6 +12,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var labelx: UILabel!
+    @IBOutlet weak var labely: UILabel!
     var touchn = 0;
     var touchtype="";
     var h : CGFloat = 0.0;
@@ -62,7 +64,10 @@ class ViewController: UIViewController {
         let touch = touches.first;
         //istouch=true;
         let point = touch!.location(in: self.view);
-        positionChange(x: point.x, y: point.y);
+        if !(Int(point.x)==xx && Int(point.y)==yy)
+        {
+            positionChange(x: point.x, y: point.y);
+        }
         
     }
     
@@ -119,7 +124,8 @@ class ViewController: UIViewController {
     {
         let x = abs(curx-xx);
         let y = abs(cury-yy);
-        
+        //labelx.text=String(x);
+        //labely.text=String(y);
 
         
         if (x>y*2)
@@ -145,6 +151,7 @@ class ViewController: UIViewController {
             saturation: s,
             brightness: b,
             alpha: 1.0);
+
         getHEX();
         
     }
