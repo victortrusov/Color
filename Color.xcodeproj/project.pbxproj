@@ -14,6 +14,7 @@
 		FF282E301E05733A007CB6EE /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF282E2F1E05733A007CB6EE /* ColorTests.swift */; };
 		FF282E3B1E05733A007CB6EE /* ColorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF282E3A1E05733A007CB6EE /* ColorUITests.swift */; };
 		FF282E481E057B13007CB6EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF282E231E05733A007CB6EE /* LaunchScreen.storyboard */; };
+		FFE98C1F1E08A1C30026F087 /* logo180.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE98C1E1E08A1C30026F087 /* logo180.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		FF282E361E05733A007CB6EE /* ColorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF282E3A1E05733A007CB6EE /* ColorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUITests.swift; sourceTree = "<group>"; };
 		FF282E3C1E05733A007CB6EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFE98C1E1E08A1C30026F087 /* logo180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo180.png; path = Color/logo180.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		FF282E0E1E057339007CB6EE = {
 			isa = PBXGroup;
 			children = (
+				FFE98C201E08AA1F0026F087 /* Resources */,
 				FF282E191E057339007CB6EE /* Color */,
 				FF282E2E1E05733A007CB6EE /* ColorTests */,
 				FF282E391E05733A007CB6EE /* ColorUITests */,
@@ -123,6 +126,14 @@
 				FF282E3C1E05733A007CB6EE /* Info.plist */,
 			);
 			path = ColorUITests;
+			sourceTree = "<group>";
+		};
+		FFE98C201E08AA1F0026F087 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FFE98C1E1E08A1C30026F087 /* logo180.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFE98C1F1E08A1C30026F087 /* logo180.png in Resources */,
 				FF282E481E057B13007CB6EE /* LaunchScreen.storyboard in Resources */,
 				FF282E221E05733A007CB6EE /* Assets.xcassets in Resources */,
 				FF282E201E05733A007CB6EE /* Main.storyboard in Resources */,
@@ -512,6 +524,7 @@
 				FF282E411E05733A007CB6EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FF282E421E05733A007CB6EE /* Build configuration list for PBXNativeTarget "ColorTests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +533,7 @@
 				FF282E441E05733A007CB6EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FF282E451E05733A007CB6EE /* Build configuration list for PBXNativeTarget "ColorUITests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +542,7 @@
 				FF282E471E05733A007CB6EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

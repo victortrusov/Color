@@ -10,10 +10,9 @@ import UIKit
 
 
 class ViewController: UIViewController {
+    @IBOutlet weak var messagelabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var labelx: UILabel!
-    @IBOutlet weak var labely: UILabel!
     var touchn = 0;
     var touchtype="";
     var h : CGFloat = 0.0;
@@ -31,7 +30,26 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         imageView.isUserInteractionEnabled = true;
+        label.isUserInteractionEnabled = true;
+        let tap = UITapGestureRecognizer(target: self, action: #selector(labelTap))
+        label.addGestureRecognizer(tap);
         setColorHSB();
+        messagelabel.layer.masksToBounds=true;
+        messagelabel.layer.cornerRadius=10;
+    }
+    
+    func labelTap() {
+        UIPasteboard.general.string = getHEX();
+        showMessage();
+    }
+    
+    func showMessage() {
+        messagelabel.alpha=0.7;
+        UIView.animate(withDuration: 1.5, animations: {
+            self.messagelabel.alpha = 0.0
+        })
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -132,7 +150,7 @@ class ViewController: UIViewController {
         {
             touchtype="h"
         }
-        else if (y>x*2)
+        else if (y>x*4)
         {
             touchtype="v"
         }
@@ -151,15 +169,30 @@ class ViewController: UIViewController {
             saturation: s,
             brightness: b,
             alpha: 1.0);
-
-        getHEX();
+        if (b<0.3)
+        {
+            label.textColor=UIColor(
+                hue: 0.0,
+                saturation: 0.0,
+                brightness: 0.5,
+                alpha: 1.0);
+        }
+        else
+        {
+            label.textColor=UIColor(
+                hue: 0.0,
+                saturation: 0.0,
+                brightness: 0.0,
+                alpha: 1.0);
+        }
+        label.text=getHEX();
         
     }
     
-    func getHEX()
+    func getHEX() -> String
     {
         let h = self.view.backgroundColor?.toHex();
-        label.text = "#"+h!;
+        return "#"+h!;
     }
     
     func currentTimeMillis() -> Int64{
