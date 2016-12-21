@@ -11,8 +11,11 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var messagelabel: UILabel!
+    @IBOutlet weak var maintextview: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var rgblabel: UILabel!
+    @IBOutlet weak var hsblabel: UILabel!
     var touchn = 0;
     var touchtype="";
     var h : CGFloat = 0.0;
@@ -35,7 +38,9 @@ class ViewController: UIViewController {
         label.addGestureRecognizer(tap);
         setColorHSB();
         messagelabel.layer.masksToBounds=true;
-        messagelabel.layer.cornerRadius=10;
+        messagelabel.layer.cornerRadius=15;
+        messagelabel.layer.borderColor = UIColor.black.cgColor;
+        messagelabel.layer.borderWidth = 2.0;
     }
     
     func labelTap() {
@@ -44,7 +49,7 @@ class ViewController: UIViewController {
     }
     
     func showMessage() {
-        messagelabel.alpha=0.7;
+        messagelabel.alpha=0.8;
         UIView.animate(withDuration: 1.5, animations: {
             self.messagelabel.alpha = 0.0
         })
@@ -71,10 +76,24 @@ class ViewController: UIViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
        //touchn=0;
-        if ((currentTimeMillis() - taptime) < 150)
+        if ((currentTimeMillis() - taptime) < 150 && touchn<5)
         {
-            if (!label.isHidden) {label.isHidden=true;}
-            else {label.isHidden=false;}
+            if (maintextview.isHidden)
+            {
+                maintextview.isHidden=false;
+                rgblabel.isHidden = true;
+                hsblabel.isHidden = true;
+            }
+            else if (rgblabel.isHidden)
+            {
+                rgblabel.isHidden=false;
+                hsblabel.isHidden=false;
+            }
+            else{
+                maintextview.isHidden=true;
+                rgblabel.isHidden = true;
+                hsblabel.isHidden = true;
+            }
         }
     }
     
@@ -108,7 +127,7 @@ class ViewController: UIViewController {
             else {
             if (touchtype=="d")
             {
-                h+=CGFloat(Double((curx-xx))/1000.0);
+                h+=CGFloat(Double((curx-xx))/1536.0);
                 if (h>=1) { h-=1; }
                 if (h<0) { h+=1; }
                 setColorHSB();
@@ -169,24 +188,34 @@ class ViewController: UIViewController {
             saturation: s,
             brightness: b,
             alpha: 1.0);
-        if (b<0.3)
+        label.text=getHEX();
+        rgblabel.text=self.view.backgroundColor?.toRbg();
+        hsblabel.text=String(lroundf(Float(h)*360))+" :H\n"+String(lroundf(Float(s)*100))+" :S\n"+String(lroundf(Float(b)*100))+" :B"
+        setColorToControls(b: b);
+    }
+    
+    func setColorToControls(b: CGFloat)
+    {
+        var c : UIColor = UIColor(
+            hue: 0.0,
+            saturation: 0.0,
+            brightness: 0.0,
+            alpha: 1.0);
+        if (b<0.35)
         {
-            label.textColor=UIColor(
+    
+            c=UIColor(
                 hue: 0.0,
                 saturation: 0.0,
                 brightness: 0.5,
                 alpha: 1.0);
         }
-        else
-        {
-            label.textColor=UIColor(
-                hue: 0.0,
-                saturation: 0.0,
-                brightness: 0.0,
-                alpha: 1.0);
-        }
-        label.text=getHEX();
-        
+        label.textColor=c;
+        messagelabel.textColor=c;
+        messagelabel.layer.borderColor=c.cgColor;
+        rgblabel.textColor = c;
+        hsblabel.textColor = c;
+
     }
     
     func getHEX() -> String
@@ -266,6 +295,19 @@ extension UIColor {
         } else {
             return String(format: "%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
         }
+    }
+    
+    func toRbg(alpha: Bool = false) -> String? {
+        guard let components = cgColor.components, components.count >= 3 else {
+            return nil
+        }
+        
+        let r = Float(components[0])
+        let g = Float(components[1])
+        let b = Float(components[2])
+
+        return  "R: " + String(lroundf(r * 255)) + "\nG: " + String(lroundf(g * 255)) + "\nB: " + String(lroundf(b * 255))
+        
     }
     
 }
